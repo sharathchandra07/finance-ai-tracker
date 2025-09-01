@@ -1,0 +1,23 @@
+CREATE DATABASE finance_tracker;
+
+USE finance_tracker;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  google_id VARCHAR(255) NOT NULL UNIQUE,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  picture VARCHAR(500),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE transactions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  description VARCHAR(255),
+  amount DECIMAL(10,2),
+  category VARCHAR(50),
+  date DATE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
